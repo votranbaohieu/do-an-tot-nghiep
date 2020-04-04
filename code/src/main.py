@@ -52,7 +52,7 @@ class TienXuLy(object):
 
     def remove_tag_html(self):
         for i, v in enumerate(self.data):
-            self.data[i]['content'] = BeautifulSoup(v['content'], 'lxml').text
+            self.data[i]['content'] = BeautifulSoup(v['content'], 'html.parser').get_text()
         return self
 
     def toLowerCase(self):
@@ -63,11 +63,14 @@ class TienXuLy(object):
     def total(self):
         for i, v in enumerate(self.data):
             t = v['content']
+            
             # Lowercase
             t = t.lower()
+
             # Remove html tag
-            # t = BeautifulSoup(t, 'lxml').text
+            t = BeautifulSoup(t, 'html.parser').get_text()
             self.data[i]['content'] = t
+
         return self
 
     def toData(self):
@@ -76,21 +79,18 @@ class TienXuLy(object):
 
 def main():
     # Get data from excel to json
-    df = pd.read_excel(DATA_TRAIN_PATH)
-    df.to_json(DATA_TRAIN_JSON, orient="records")
+    # df = pd.read_excel(DATA_TRAIN_PATH)
+    # df.to_json(DATA_TRAIN_JSON, orient="records")
 
     # Read data train
     train_loader = FileReader(filePath=DATA_TRAIN_JSON, encoder="utf-8")
     data_train = train_loader.read_json()
 
     # TIEN XU LY
-    data_train = TienXuLy(data_train).total().toData()
+    data_train = TienXuLy(data_train).total().remove_duplicate_json().toData()
 
-    print(data_train)
+    print(np.array(data_train))
 
 
 if __name__ == "__main__":
     main()
-    # text = """<yt-formatted-string force-default-style="" class="style-scope ytd-video-primary-info-renderer">Python's BeautifulSoup library for cleaning HTML tags in a text</yt-formatted-string>"""
-    # clean = BeautifulSoup(text).text
-    # print(clean)

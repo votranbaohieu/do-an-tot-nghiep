@@ -83,18 +83,18 @@ class TienXuLy(object):
 
 def main():
     # Get data from excel to json
-    # df = pd.read_excel(DATA_TRAIN_PATH)
-    # df.to_json(DATA_TRAIN_JSON, orient="records")
+    df = pd.read_excel(DATA_TRAIN_PATH)
+    df.to_json(DATA_TRAIN_JSON, orient="records")
 
     # Read data train
     train_loader = FileReader(filePath=DATA_TRAIN_JSON, encoder="utf-8")
     data_train = train_loader.read_json()
 
     # TIEN XU LY
-    data_train = TienXuLy(data_train).total().remove_duplicate().toData()
+    # data_train = TienXuLy(data_train).total().remove_duplicate().toData()
 
-    print(np.array(data_train))
-    # print(len(data_train))
+    # print(np.array(data_train))
+    print(len(data_train))
 
 
 if __name__ == "__main__":

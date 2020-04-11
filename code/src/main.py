@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import json
 from bs4 import BeautifulSoup
+from pyvi import ViTokenizer
 
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 DATA_TRAIN_PATH = os.path.join(DIR_PATH, 'data/train/data.xlsx')
@@ -42,7 +43,7 @@ class TienXuLy(object):
     def __init__(self, data):
         self.data = data
 
-    def remove_duplicate_json(self):
+    def remove_duplicate(self):
         newList = [self.data[0]]
         for e in self.data:
             if e not in newList:
@@ -55,6 +56,9 @@ class TienXuLy(object):
             self.data[i]['content'] = BeautifulSoup(v['content'], 'html.parser').get_text()
         return self
 
+    def Tokenizer(self):
+        pass
+
     def toLowerCase(self):
         for i, v in enumerate(self.data):
             self.data[i]['content'] = v['content'].lower()
@@ -63,7 +67,7 @@ class TienXuLy(object):
     def total(self):
         for i, v in enumerate(self.data):
             t = v['content']
-            
+
             # Lowercase
             t = t.lower()
 
@@ -87,9 +91,10 @@ def main():
     data_train = train_loader.read_json()
 
     # TIEN XU LY
-    data_train = TienXuLy(data_train).total().remove_duplicate_json().toData()
+    data_train = TienXuLy(data_train).total().remove_duplicate().toData()
 
     print(np.array(data_train))
+    # print(len(data_train))
 
 
 if __name__ == "__main__":

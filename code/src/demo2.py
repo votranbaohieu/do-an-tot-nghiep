@@ -39,10 +39,10 @@ class DocPreprocess(object):
         self.labelCol = labelCol
         self.contentCol = contentCol
         
-        self.html_stripping = False
-        self.accented_char_removal = False
-        self.special_char_removal = False
-        self.stopword_removal = False
+        self.html = False
+        self.accented_char = False
+        self.special_char = False
+        self.stopword = False
 
         self.__set_stopwords()
 
@@ -54,12 +54,13 @@ class DocPreprocess(object):
             stopwords = set([w.strip().replace(' ', '_') for w in f.readlines()])
         self.stopwords = stopwords
 
+
     def html_stripping(self):
-        self.html_stripping = True
+        self.html = True
         return self
 
     def remove_special_characters(self):
-        self.special_char_removal = True
+        self.special_char = True
         return self
 
     def remove_accented_chars(self):

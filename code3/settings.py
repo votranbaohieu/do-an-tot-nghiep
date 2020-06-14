@@ -22,5 +22,5 @@ STOP_WORDS = os.path.join(DIR_PATH, 'data/stopwords.txt')
 ACRONYMS = os.path.join(DIR_PATH, 'data/acronyms.json')
 # DICTIONARY_PATH = os.path.join(DIR_PATH, 'dictionary.txt')
 
-WORD2VEC_MODEL_PATH = os.path.join(DIR_PATH, 'data/vi/vi.vec')
+WORD2VEC_MODEL_PATH = os.path.join(DIR_PATH, 'models/word2vec.model')
 MODEL_PATH = os.path.join(DIR_PATH, 'models/model.h5')

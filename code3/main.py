@@ -72,6 +72,10 @@ def clean_text(text, stopwords, acronyms):
     # Chuẩn hóa láy âm tiết
     t = re.sub(r'(\D)\1+', r'\1', t)
 
+    t = " ".join([x.strip(settings.SPECIAL_CHARACTER) for x in t.split()])
+
+    t = ' ' + t + ' '
+
     for key in acronyms:
         for value in acronyms[key]:
             if value in t:
@@ -80,8 +84,6 @@ def clean_text(text, stopwords, acronyms):
     # Tách từ
     t = ViTokenizer.tokenize(t)
 
-    t = [x.strip(settings.SPECIAL_CHARACTER) for x in t.split()]
-
     t = [word for word in t if word not in stopwords]
 
     return " ".join(t)
@@ -89,7 +91,6 @@ def clean_text(text, stopwords, acronyms):
 # ============================================================================================================
 
 # Word2vec
-
 
 
 def read_data(path_data):

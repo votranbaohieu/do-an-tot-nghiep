@@ -59,7 +59,7 @@ class Model:
         that was read, plus the suffix ".bak"
         '''
         if self.isValid( self.fileName ):
-            fileName = self.fileName + ".py"
+            fileName = self.fileName
             file = open( fileName, 'w' )
             file.write( text )
             file.close()

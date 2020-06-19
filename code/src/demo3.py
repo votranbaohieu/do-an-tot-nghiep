@@ -7,7 +7,6 @@ import pandas as pd
 from pyvi import ViTokenizer
 from bs4 import BeautifulSoup
 from gensim import corpora, matutils
-import unicodedata2
 import settings
 from sklearn.metrics import classification_report
 from sklearn.svm import LinearSVC
@@ -97,7 +96,7 @@ class NLP(object):
             t = ViTokenizer.tokenize(t)
             
             # Xóa dấu
-            t = unicodedata2.normalize('NFD', t).encode('ascii', 'ignore').decode("utf-8")
+            # t = unicodedata2.normalize('NFD', t).encode('ascii', 'ignore').decode("utf-8")
 
             t = [x.strip(settings.SPECIAL_CHARACTER) for x in t.split()]
 
